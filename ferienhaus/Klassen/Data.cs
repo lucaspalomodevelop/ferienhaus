@@ -9,7 +9,6 @@ namespace ferienhaus.Klassen
 {
     public static class Data
     {
-
         public static object read()
         {
             var reader = new StreamReader(File.OpenRead(@".\Data.csv"));

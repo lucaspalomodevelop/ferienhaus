@@ -22,6 +22,6 @@
 
         <Button Grid.Column="1" Grid.Row="1" Click="OnClick1"> Benutzer </Button>
         <Button Grid.Column="1" Grid.Row="3" Click="OnClick2">Admin</Button>
-
+        
     </Grid>
 </Window>
