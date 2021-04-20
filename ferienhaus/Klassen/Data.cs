@@ -4,41 +4,53 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace ferienhaus.Klassen
 {
-    public static class Data
+    public class Data
     {
-        public static object read()
-        {
-            var reader = new StreamReader(File.OpenRead(@".\Data.csv"));
-            List<string> listA = new List<string>();
-            List<string> listB = new List<string>();
-            while (!reader.EndOfStream)
-            {
-                var line = reader.ReadLine();
-                var values = line.Split(';');
 
-                listA.Add(values[0]);
-                listB.Add(values[1]);
-                foreach (var coloumn1 in listA)
-                {
-                    Console.WriteLine(coloumn1);
-                }
-                foreach (var coloumn2 in listA)
-                {
-                    Console.WriteLine(coloumn2);
-                }
-            }
-            return new object();
+        private static Data instance = null;
+
+        private Data()
+        {
         }
 
-        public static void write(object OBJ)
+        public static Data Instance
         {
-            var write = new StreamWriter(File.OpenWrite(@".\Data.csv"));
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new Data();
+                }
+                return instance;
+            }
+        }
 
-        //    write.WriteLine(OBJ.toCSV());
+        public Estate read()
+        {
+            using (var reader = new StreamReader(File.OpenRead(@".\Data.json")))
+            {
+                return (Estate)JsonConvert.DeserializeObject(reader.ReadToEnd());
+            }
+
+        }
+
+        public void write(Estate OBJ)
+        {
+
+            using (var write = new StreamWriter(File.OpenWrite(@".\Data.json")))
+            {
+                string estateJson = JsonConvert.SerializeObject(OBJ);
+
+                write.Write(estateJson);
+            }
+
+
         }
     }
+
 
 }

@@ -1,0 +1,43 @@
+﻿<Window x:Class="ferienhaus.UserView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ferienhaus"
+        mc:Ignorable="d"
+        Title="Ferienhaus Suche" Height="421.6" Width="750">
+    <Grid HorizontalAlignment="Left" Height="453" Margin="0,0,0,0" VerticalAlignment="Top" Width="750">
+
+
+        <!--Auf felder zugreifen (by x:name) :-->
+        <!--TextBox ortschaft = (TextBox) this.FindName("ortschaft");-->
+
+        <Rectangle Fill="#575757" HorizontalAlignment="Left" Height="50" Stroke="Black" VerticalAlignment="Top" Width="375"/>
+        <Rectangle Fill="#2e2e2e" HorizontalAlignment="Left" Height="50" Margin="0,50,0,0" Stroke="Black" VerticalAlignment="Top" Width="375"/>
+        <Rectangle Fill="#575757" HorizontalAlignment="Left" Height="50" Margin="0,99,0,0" Stroke="Black" VerticalAlignment="Top" Width="375"/>
+        <Rectangle Fill="#2e2e2e" HorizontalAlignment="Left" Height="50" Margin="0,149,0,0" Stroke="Black" VerticalAlignment="Top" Width="375"/>
+        <Rectangle Fill="#575757" HorizontalAlignment="Left" Height="50" Margin="0,198,0,0" Stroke="Black" VerticalAlignment="Top" Width="375"/>
+        <Rectangle Fill="#2e2e2e" HorizontalAlignment="Left" Height="50" Margin="0,248,0,0" Stroke="Black" VerticalAlignment="Top" Width="375"/>
+        <Rectangle Fill="#575757" HorizontalAlignment="Left" Height="99" Margin="0,297,0,0" Stroke="Black" VerticalAlignment="Top" Width="375"/>
+        <Label Content="Ortschaft" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Foreground="#FFFCFCFC" FontSize="22"/>
+        <Label Content="Personen Max." HorizontalAlignment="Left" Margin="10,55,0,0" VerticalAlignment="Top" Foreground="#FFFCFCFC" FontSize="22"/>
+        <Label Content="Zimmer" HorizontalAlignment="Left" Margin="10,105,0,0" VerticalAlignment="Top" Foreground="#FFFCFCFC" FontSize="22"/>
+        <Label Content="Preis Max." HorizontalAlignment="Left" Margin="10,153,0,0" VerticalAlignment="Top" Foreground="#FFFCFCFC" FontSize="22"/>
+        <Label Content="Ankunft" HorizontalAlignment="Left" Margin="10,203,0,0" VerticalAlignment="Top" Foreground="#FFFCFCFC" FontSize="22"/>
+        <Label Content="Abfahrt" HorizontalAlignment="Left" Margin="10,252,0,0" VerticalAlignment="Top" Foreground="#FFFCFCFC" FontSize="22"/>
+        <TextBox x:Name="ortschaft" HorizontalAlignment="Left" Height="30" Margin="135,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223"/>
+        <Slider x:Name="personen_maximum" HorizontalAlignment="Left" Margin="175,67,0,0" VerticalAlignment="Top" Width="150"/>
+        <Label Content="0" HorizontalAlignment="Left" Margin="338,57,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" Height="39" Width="27"/>
+        <Slider x:Name="zimmer" HorizontalAlignment="Left" Margin="175,117,0,0" VerticalAlignment="Top" Width="150"/>
+        <Label Content="0" HorizontalAlignment="Left" Margin="338,107,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" Height="39" Width="27"/>
+        <TextBox x:Name="preis_maximum" HorizontalAlignment="Left" Height="30" Margin="135,159,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223"/>
+        <DatePicker x:Name="datum_ankunft" HorizontalAlignment="Left" Margin="135,211,0,0" VerticalAlignment="Top" Width="223" Height="22"/>
+        <DatePicker x:Name="datum_abfahrt" HorizontalAlignment="Left" Margin="135,262,0,0" VerticalAlignment="Top" Width="223" Height="22"/>
+        <Button x:Name="suche" Content="SUCHE" HorizontalAlignment="Left" Margin="13,312,0,0" VerticalAlignment="Top" Width="348" Height="68" Background="#FF35B1AA" Foreground="White" FontSize="30" Click="suche_Click"/>
+
+        <!--Hier estates in liste eintragen-->
+        <ListBox x:Name="estate_liste" HorizontalAlignment="Left" Height="396" Margin="375,0,0,0" VerticalAlignment="Top" Width="375"/>
+
+
+    </Grid>
+</Window>

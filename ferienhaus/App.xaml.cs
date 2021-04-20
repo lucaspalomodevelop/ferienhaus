@@ -6,6 +6,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
+using ferienhaus.Klassen;
+
 namespace ferienhaus
 {
     /// <summary>
@@ -13,5 +15,9 @@ namespace ferienhaus
     /// </summary>
     public partial class App : Application
     {
+
+        public static List<Estate> estates = new List<Estate>();
+
+
     }
 }
