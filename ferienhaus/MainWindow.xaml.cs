@@ -29,5 +29,22 @@ namespace ferienhaus
 
 
         }
+
+        private void Button_Click_User(object sender, RoutedEventArgs e)
+        {
+            
+            UserView userView = new UserView();
+            userView.Show();
+            this.Close();
+        }
+
+ 
+
+        private void Button_Click_Admin(object sender, RoutedEventArgs e)
+        {
+            AdminView adminView = new AdminView();
+            adminView.Show();
+            this.Close();
+        }
     }
 }
