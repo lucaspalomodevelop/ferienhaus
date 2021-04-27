@@ -103,7 +103,7 @@ namespace ferienhaus
             string estateName = ((Button)sender).Tag.ToString();
             List<Estate> estates = EstateManager.getInstance().estates;
 
-            Estate bookEstate;
+            Estate bookEstate = null;
                // meins auch .-.
             foreach(Estate estate in estates)
             {
@@ -114,7 +114,7 @@ namespace ferienhaus
                 }
             }
 
-            List<BookingTime> BTL = estate.BookingTime;
+            List<BookingTime> BTL = bookEstate.BookingTimes;
             BTL.Add(new BookingTime(ankunft, abfahrt));
         }
     }
