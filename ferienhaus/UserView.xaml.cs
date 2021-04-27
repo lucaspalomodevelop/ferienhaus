@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,7 +33,18 @@ namespace ferienhaus
         public UserView()
         {
             InitializeComponent();
+           this.Closing += new CancelEventHandler(MainWindow_Closing);
         }
+
+
+
+        void MainWindow_Closing(object sender, CancelEventArgs e)
+        {
+            MainWindow MW = new MainWindow();
+
+            MW.Show();
+        }
+
 
         public void getDataFromFields()
         {
@@ -50,6 +62,7 @@ namespace ferienhaus
             ankunft = this.datum_ankunft.DisplayDate;
             abfahrt = this.datum_abfahrt.DisplayDate;
         }
+
 
         private void suche_Click(object sender, RoutedEventArgs e)
         {
@@ -69,8 +82,45 @@ namespace ferienhaus
 
             };
 
-
-          //  EstateManager.getInstance().checkAvailability();
+            List<Estate> foundEstates = EstateManager.getInstance().checkAvailability(seachEstate);
+            listFoundEstates(foundEstates);
         }
+
+        public void listFoundEstates(List<Estate> estates)
+        {
+            List<EstateItem> estateListItem = new List<EstateItem>();
+            foreach (Estate estate in estates)
+            {
+                estateListItem.Add(new EstateItem() { EstateName = estate.EstateName });
+            }
+            estate_liste.ItemsSource = estateListItem;
+        }
+
+        private void bookEstate(object sender, RoutedEventArgs e)
+        {
+
+            ((Button)sender).Content = "Gebucht!";
+            string estateName = ((Button)sender).Tag.ToString();
+            List<Estate> estates = EstateManager.getInstance().estates;
+
+            Estate bookEstate;
+               // meins auch .-.
+            foreach(Estate estate in estates)
+            {
+                if(estate.EstateName == estateName)
+                {
+                    bookEstate = estate;
+                    break;
+                }
+            }
+
+            List<BookingTime> BTL = estate.BookingTime;
+            BTL.Add(new BookingTime(ankunft, abfahrt));
+        }
+    }
+
+    class EstateItem
+    {
+        public string EstateName { get; set; }
     }
 }

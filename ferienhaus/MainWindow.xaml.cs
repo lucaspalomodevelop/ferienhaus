@@ -25,8 +25,8 @@ namespace ferienhaus
         {
             InitializeComponent();
 
-        //    object mydata =  Data.read();
-
+            //    object mydata =  Data.read();
+            EstateManager.getInstance().loadEstates();
 
         }
 

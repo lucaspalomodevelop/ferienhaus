@@ -29,28 +29,24 @@ namespace ferienhaus.Klassen
             }
         }
 
-        public Estate read()
+        public List<Estate> read()
         {
-            using (var reader = new StreamReader(File.OpenRead(@".\Data.json")))
+            using (StreamReader file = File.OpenText(@".\Data.json"))
             {
-                return (Estate)JsonConvert.DeserializeObject(reader.ReadToEnd());
+                JsonSerializer serializer = new JsonSerializer();
+                List<Estate> estates = (List<Estate>)serializer.Deserialize(file, typeof(List<Estate>));
+                return estates;
             }
-
         }
 
-        public void write(Estate OBJ)
+        public void write(List<Estate> OBJ)
         {
 
-            using (var write = new StreamWriter(File.OpenWrite(@".\Data.json")))
+            using (StreamWriter file = File.CreateText(@".\Data.json"))
             {
-                string estateJson = JsonConvert.SerializeObject(OBJ);
-
-                write.Write(estateJson);
+                JsonSerializer serializer = new JsonSerializer();
+                serializer.Serialize(file, OBJ);
             }
-
-
         }
     }
-
-
 }

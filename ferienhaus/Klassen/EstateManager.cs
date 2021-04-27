@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,11 +15,11 @@ namespace ferienhaus.Klassen
     public class EstateManager
     {
         private static EstateManager instance;
-        private List<Estate> estates = new List<Estate>();
+        public List<Estate> estates = new List<Estate>();
 
         private EstateManager()
         {
-            
+
         }
 
         public static EstateManager getInstance()
@@ -33,72 +34,54 @@ namespace ferienhaus.Klassen
 
         public void addEstate(Estate estate)
         {
-            this.estates.Add(estate);
+            estates.Add(estate);
+            Data.Instance.write(estates);
+            MessageBox.Show("Added Esate " + estate.EstateName, "INFO");
         }
 
-        // mach mal lieber einen negativ-check in der schleife. Falls bedingung nicht erfüllt dann break;
-        // ist sauberer als if in if in if ...
-
-
-
-        // ich würde das nach auschlussverfahren probieren. wenn ein attribut nicht übereinstimmtt dann mus der rest auch nicht abgechekct werden
-        //achso verstehe
-
-        //ne ich glaube das geht nicht nach ausschlussverfahren
-        //er muss ja durchiterieren durch sämtliche attribute. 
-        //es gibt für einen attribut keinen state der die abfrage beenden würde
-
-        // besser ? 
-
-        //discord? 
-
+        public void loadEstates()
+        {
+            this.estates = Data.Instance.read();
+        }
 
         public List<Estate> checkAvailability(Estate reference)
         {
-
+            loadEstates();
             //https://docs.microsoft.com/de-de/dotnet/csharp/language-reference/operators/conditional-operator
 
-            List<Estate> List = new List<Estate>();
+            List<Estate> foundEstates = new List<Estate>();
 
             foreach (Estate estate in this.estates)
             {
 
-                if(estate.Bedrooms != reference.Bedrooms && reference.Bedrooms != null)
+                if (estate.Bedrooms < reference.Bedrooms && reference.Bedrooms != null)
+                {
+                    Debug.WriteLine("Search Estate Bedrooms: " + reference.Bedrooms + "| current estate in list: " + estate.Bedrooms);
                     continue;
-                if (estate.Persons != reference.Persons && reference.Persons != null)
+                }
+                if (estate.Persons < reference.Persons && reference.Persons != null)
+                {
+                    Debug.WriteLine("Search Estate Persons: " + reference.Persons + "| current estate in list: " + estate.Persons);
                     continue;
-                if (estate.Price != reference.Price && reference.Price != null)
+                }
+                if (estate.Price - 1 >= reference.Price && reference.Price != null)
+                {
+                    Debug.WriteLine("Search Estate Price: " + reference.Price + "| current estate in list: " + estate.Price);
                     continue;
+                }
                 if (estate.Region != reference.Region && reference.Region != null)
+                {
+                    Debug.WriteLine("Search Estate Region: " + reference.Region + "| current estate in list: " + estate.Region);
                     continue;
-                if (estate.CustomerID != reference.CustomerID && reference.CustomerID != null)
-                    continue;
+                }
                 if (estate.isBooked(reference.BookingTimes[0]) == true && reference.BookingTimes != null)
                     continue;
 
-
-
-                if (estate.Bedrooms == reference.Bedrooms || estate.Bedrooms == null)
-                {
-                    if (estate.Persons == reference.Persons || estate.Persons == null)
-                    {
-                        if (estate.Price == reference.Price || estate.Price == null)
-                        {
-                            if (estate.Region == reference.Region || estate.Region == "")
-                            {
-                                if (estate.CustomerID == reference.CustomerID || estate.CustomerID == "")
-                                {
-      
-                                            List.Add(estate);
-                                }
-                            }
-                        }
-                    }
-                }
+                foundEstates.Add(estate);
+               
             }
 
-
-            return List;
+            return foundEstates;
         }
     }
 }

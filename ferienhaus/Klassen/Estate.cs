@@ -15,14 +15,14 @@ namespace ferienhaus.Klassen
         public string Region { get; set; }
         public string CustomerID { get; set; }
         public List<BookingTime> BookingTimes { get; set; }
-
+        public string EstateName { get; set; }
 
 
         public Estate()
         {
 
         }
-        public Estate(int? bedrooms, int? persons, double? price, string region, string customerID, List<BookingTime> bookingTimes)
+        public Estate(string estateName, int? bedrooms, int? persons, double? price, string region, string customerID, List<BookingTime> bookingTimes)
         {
             Bedrooms = bedrooms;
             Persons = persons;
@@ -30,6 +30,7 @@ namespace ferienhaus.Klassen
             Region = region;
             CustomerID = customerID;
             BookingTimes = bookingTimes;
+            EstateName = estateName;
         }
         /*if((start < bisDat && start > vonDat) || (ende < bisDat && ende > vonDat) || (start < vonDat && ende > bisDat)) {
         frei = false;

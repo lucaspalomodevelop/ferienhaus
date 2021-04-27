@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ferienhaus"
         mc:Ignorable="d"
-        Title="Ferienhaus Suche" Height="421.6" Width="750">
+        Title="Ferienhaus Suche" Height="421.6" Width="750"
+        >
     <Grid HorizontalAlignment="Left" Height="453" Margin="0,0,0,0" VerticalAlignment="Top" Width="750">
 
 
@@ -26,18 +27,30 @@
         <Label Content="Ankunft" HorizontalAlignment="Left" Margin="10,203,0,0" VerticalAlignment="Top" Foreground="#FFFCFCFC" FontSize="22"/>
         <Label Content="Abfahrt" HorizontalAlignment="Left" Margin="10,252,0,0" VerticalAlignment="Top" Foreground="#FFFCFCFC" FontSize="22"/>
         <TextBox x:Name="ortschaft" HorizontalAlignment="Left" Height="30" Margin="135,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223"/>
-        <Slider x:Name="personen_maximum" HorizontalAlignment="Left" Margin="175,67,0,0" VerticalAlignment="Top" Width="150"/>
-        <Label Content="0" HorizontalAlignment="Left" Margin="338,57,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" Height="39" Width="27"/>
-        <Slider x:Name="zimmer" HorizontalAlignment="Left" Margin="175,117,0,0" VerticalAlignment="Top" Width="150"/>
-        <Label Content="0" HorizontalAlignment="Left" Margin="338,107,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" Height="39" Width="27"/>
+        <Slider x:Name="personen_maximum" HorizontalAlignment="Left" Margin="175,67,0,0" VerticalAlignment="Top" Width="150" Minimum="0" Maximum="10" IsSnapToTickEnabled="True" TickFrequency="1"/>
+        <Label Content="{Binding ElementName=personen_maximum, Path=Value}" HorizontalAlignment="Left" Margin="338,57,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" Height="39" Width="27"/>
+        <Slider x:Name="zimmer" HorizontalAlignment="Left" Margin="175,117,0,0" VerticalAlignment="Top" Width="150" Minimum="0" Maximum="10" IsSnapToTickEnabled="True" TickFrequency="1"/>
+        <Label Content="{Binding ElementName=zimmer, Path=Value}" HorizontalAlignment="Left" Margin="338,107,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" Height="39" Width="27"/>
         <TextBox x:Name="preis_maximum" HorizontalAlignment="Left" Height="30" Margin="135,159,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223"/>
         <DatePicker x:Name="datum_ankunft" HorizontalAlignment="Left" Margin="135,211,0,0" VerticalAlignment="Top" Width="223" Height="22"/>
         <DatePicker x:Name="datum_abfahrt" HorizontalAlignment="Left" Margin="135,262,0,0" VerticalAlignment="Top" Width="223" Height="22"/>
         <Button x:Name="suche" Content="SUCHE" HorizontalAlignment="Left" Margin="13,312,0,0" VerticalAlignment="Top" Width="348" Height="68" Background="#FF35B1AA" Foreground="White" FontSize="30" Click="suche_Click"/>
 
         <!--Hier estates in liste eintragen-->
-        <ListBox x:Name="estate_liste" HorizontalAlignment="Left" Height="396" Margin="375,0,0,0" VerticalAlignment="Top" Width="375"/>
-
-
+		<ListBox x:Name="estate_liste" HorizontalAlignment="Left" Height="396" Margin="375,0,0,0" VerticalAlignment="Top" Width="375">
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<Grid Margin="0,2">
+						<Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50*" />
+                            <ColumnDefinition Width="50*" />
+						</Grid.ColumnDefinitions>
+						<TextBlock Grid.Column="0" Text="{Binding EstateName}" />
+                        <Button  Grid.Column="2" Content="Jetzt Buchen" Width="100" Height="30" Background="#FF35B1AA" Foreground="White" FontSize="12" HorizontalAlignment="Right" Click="bookEstate" Tag="{Binding EstateName}" >
+                        </Button>
+                    </Grid>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
     </Grid>
 </Window>
