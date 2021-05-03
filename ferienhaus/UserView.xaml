@@ -8,11 +8,6 @@
         Title="Ferienhaus Suche" Height="421.6" Width="750"
         >
     <Grid HorizontalAlignment="Left" Height="453" Margin="0,0,0,0" VerticalAlignment="Top" Width="750">
-
-
-        <!--Auf felder zugreifen (by x:name) :-->
-        <!--TextBox ortschaft = (TextBox) this.FindName("ortschaft");-->
-
         <Rectangle Fill="#575757" HorizontalAlignment="Left" Height="50" Stroke="Black" VerticalAlignment="Top" Width="375"/>
         <Rectangle Fill="#2e2e2e" HorizontalAlignment="Left" Height="50" Margin="0,50,0,0" Stroke="Black" VerticalAlignment="Top" Width="375"/>
         <Rectangle Fill="#575757" HorizontalAlignment="Left" Height="50" Margin="0,99,0,0" Stroke="Black" VerticalAlignment="Top" Width="375"/>
@@ -39,17 +34,16 @@
         <!--Hier estates in liste eintragen-->
 		<ListBox x:Name="estate_liste" HorizontalAlignment="Left" Height="396" Margin="375,0,0,0" VerticalAlignment="Top" Width="375">
 			<ListBox.ItemTemplate>
-				<DataTemplate>
-					<Grid Margin="0,2">
-						<Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="50*" />
-                            <ColumnDefinition Width="50*" />
-						</Grid.ColumnDefinitions>
-						<TextBlock Grid.Column="0" Text="{Binding EstateName}" />
-                        <Button  Grid.Column="2" Content="Jetzt Buchen" Width="100" Height="30" Background="#FF35B1AA" Foreground="White" FontSize="12" HorizontalAlignment="Right" Click="bookEstate" Tag="{Binding EstateName}" >
-                        </Button>
+                <DataTemplate>
+                    <Grid Margin="0,3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" VerticalAlignment="Center" Width="248" HorizontalAlignment="Center" Text="{Binding EstateName}" />
+                        <Button  Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" Content="Jetzt Buchen" Width="100" Height="30" Background="#FF35B1AA" Foreground="White" FontSize="12" Click="bookEstate" Tag="{Binding EstateName}" ></Button>
                     </Grid>
-				</DataTemplate>
+                </DataTemplate>
 			</ListBox.ItemTemplate>
 		</ListBox>
     </Grid>

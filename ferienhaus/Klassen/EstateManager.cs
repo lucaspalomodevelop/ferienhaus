@@ -15,7 +15,7 @@ namespace ferienhaus.Klassen
     public class EstateManager
     {
         private static EstateManager instance;
-        public List<Estate> estates = new List<Estate>();
+        public List<Estate> estates;
 
         private EstateManager()
         {
@@ -27,6 +27,7 @@ namespace ferienhaus.Klassen
             if (instance == null)
             {
                 instance = new EstateManager();
+                instance.estates = new List<Estate>();
             }
             return instance;
         }
@@ -41,13 +42,16 @@ namespace ferienhaus.Klassen
 
         public void loadEstates()
         {
-            this.estates = Data.Instance.read();
+            List<Estate> estatesFromFile = Data.Instance.read();
+            if (estatesFromFile != null)
+            {
+                this.estates = estatesFromFile;
+            }
         }
 
         public List<Estate> checkAvailability(Estate reference)
         {
             loadEstates();
-            //https://docs.microsoft.com/de-de/dotnet/csharp/language-reference/operators/conditional-operator
 
             List<Estate> foundEstates = new List<Estate>();
 
