@@ -12,6 +12,8 @@ namespace ferienhaus.Klassen
     {
 
         private static Data instance = null;
+        private static string appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ferienhaus";
+
 
         private Data()
         {
@@ -24,33 +26,42 @@ namespace ferienhaus.Klassen
                 if (instance == null)
                 {
                     instance = new Data();
+                    instance.init();
                 }
                 return instance;
             }
         }
 
-        public Estate read()
+        public void init()
         {
-            using (var reader = new StreamReader(File.OpenRead(@".\Data.json")))
+            if (!Directory.Exists(appData))
             {
-                return (Estate)JsonConvert.DeserializeObject(reader.ReadToEnd());
+                Directory.CreateDirectory(appData);
             }
-
+            if (!File.Exists(appData + "\\estate_data.json"))
+            {
+                File.Create(appData + "\\estate_data.json");
+            }
         }
 
-        public void write(Estate OBJ)
+        public List<Estate> read()
+        {
+            using (StreamReader file = File.OpenText(appData + "\\estate_data.json"))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                List<Estate> estates = (List<Estate>)serializer.Deserialize(file, typeof(List<Estate>));
+                return estates;
+            }
+        }
+
+        public void write(List<Estate> OBJ)
         {
 
-            using (var write = new StreamWriter(File.OpenWrite(@".\Data.json")))
+            using (StreamWriter file = File.CreateText(appData + "\\estate_data.json"))
             {
-                string estateJson = JsonConvert.SerializeObject(OBJ);
-
-                write.Write(estateJson);
+                JsonSerializer serializer = new JsonSerializer();
+                serializer.Serialize(file, OBJ);
             }
-
-
         }
     }
-
-
 }

@@ -82,9 +82,6 @@
     <Compile Include="Klassen\Estate.cs" />
     <Compile Include="Klassen\BookingTime.cs" />
     <Compile Include="Klassen\EstateManager.cs" />
-    <Compile Include="Klassen\Landlord.cs" />
-    <Compile Include="Klassen\Tenant.cs" />
-    <Compile Include="Klassen\User.cs" />
     <Compile Include="UserView.xaml.cs">
       <DependentUpon>UserView.xaml</DependentUpon>
     </Compile>
