@@ -18,7 +18,7 @@
         <Label Content="Ortschaft" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Foreground="#FFFCFCFC" FontSize="22"/>
         <Label Content="Personen Max." HorizontalAlignment="Left" Margin="10,55,0,0" VerticalAlignment="Top" Foreground="#FFFCFCFC" FontSize="22"/>
         <Label Content="Zimmer" HorizontalAlignment="Left" Margin="10,105,0,0" VerticalAlignment="Top" Foreground="#FFFCFCFC" FontSize="22"/>
-        <Label Content="Preis Max." HorizontalAlignment="Left" Margin="10,153,0,0" VerticalAlignment="Top" Foreground="#FFFCFCFC" FontSize="22"/>
+        <Label Content="Budget" HorizontalAlignment="Left" Margin="10,153,0,0" VerticalAlignment="Top" Foreground="#FFFCFCFC" FontSize="22"/>
         <Label Content="Ankunft" HorizontalAlignment="Left" Margin="10,203,0,0" VerticalAlignment="Top" Foreground="#FFFCFCFC" FontSize="22"/>
         <Label Content="Abfahrt" HorizontalAlignment="Left" Margin="10,252,0,0" VerticalAlignment="Top" Foreground="#FFFCFCFC" FontSize="22"/>
         <TextBox x:Name="ortschaft" HorizontalAlignment="Left" Height="30" Margin="135,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223"/>

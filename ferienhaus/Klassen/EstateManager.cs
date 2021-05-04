@@ -36,7 +36,7 @@ namespace ferienhaus.Klassen
         public void addEstate(Estate estate)
         {
             estates.Add(estate);
-            Data.Instance.write(estates);
+            saveEstates();
             MessageBox.Show("Added Esate " + estate.EstateName, "INFO");
         }
 
@@ -47,6 +47,11 @@ namespace ferienhaus.Klassen
             {
                 this.estates = estatesFromFile;
             }
+        }
+
+        public void saveEstates()
+        {
+            Data.Instance.write(estates);
         }
 
         public List<Estate> checkAvailability(Estate reference)
@@ -73,7 +78,7 @@ namespace ferienhaus.Klassen
                     Debug.WriteLine("Search Estate Price: " + reference.Price + "| current estate in list: " + estate.Price);
                     continue;
                 }
-                if (estate.Region != reference.Region && reference.Region != null)
+                if (!estate.Region.Equals(reference.Region) && reference.Region != null)
                 {
                     Debug.WriteLine("Search Estate Region: " + reference.Region + "| current estate in list: " + estate.Region);
                     continue;

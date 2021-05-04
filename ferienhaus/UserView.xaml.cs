@@ -27,8 +27,8 @@ namespace ferienhaus
         public int personen { get; set; }
         public int zimmeranzahl { get; set; }
         public double preismax { get; set; }
-        public DateTime ankunft { get; set; }
-        public DateTime abfahrt { get; set; }
+        public DateTime? ankunft { get; set; }
+        public DateTime? abfahrt { get; set; }
 
         public UserView()
         {
@@ -59,8 +59,8 @@ namespace ferienhaus
             {
                 MessageBox.Show("Preis ist ungültig!", "Fehler");
             }
-            ankunft = this.datum_ankunft.DisplayDate;
-            abfahrt = this.datum_abfahrt.DisplayDate;
+            ankunft = this.datum_ankunft.SelectedDate;
+            abfahrt = this.datum_abfahrt.SelectedDate;
         }
 
 
@@ -99,23 +99,27 @@ namespace ferienhaus
         private void bookEstate(object sender, RoutedEventArgs e)
         {
 
-            ((Button)sender).Content = "Gebucht!";
             string estateName = ((Button)sender).Tag.ToString();
             List<Estate> estates = EstateManager.getInstance().estates;
 
             Estate bookEstate = null;
-               // meins auch .-.
             foreach(Estate estate in estates)
             {
                 if(estate.EstateName == estateName)
                 {
                     bookEstate = estate;
+                    EstateManager.getInstance().estates.Remove(bookEstate);
                     break;
                 }
             }
 
+            ((Button)sender).Content = "Gebucht!";
+
             List<BookingTime> BTL = bookEstate.BookingTimes;
             BTL.Add(new BookingTime(ankunft, abfahrt));
+
+            EstateManager.getInstance().estates.Add(bookEstate);
+            EstateManager.getInstance().saveEstates();
         }
     }
 

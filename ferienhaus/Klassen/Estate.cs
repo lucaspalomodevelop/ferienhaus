@@ -40,6 +40,5 @@ namespace ferienhaus.Klassen
             }
             return false;
         }
-
     }
 }

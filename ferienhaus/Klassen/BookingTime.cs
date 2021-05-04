@@ -8,14 +8,14 @@ namespace ferienhaus.Klassen
 {
     public class BookingTime
     {
-        public BookingTime(DateTime startTime, DateTime endTime)
+        public BookingTime(DateTime? startTime, DateTime? endTime)
         {
             this.startTime = startTime;
             this.endTime = endTime;
         }
 
-        public DateTime startTime { get; set; }
+        public DateTime? startTime { get; set; }
 
-        public DateTime endTime { get; set; }
+        public DateTime? endTime { get; set; }
     }
 }
